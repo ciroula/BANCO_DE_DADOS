@@ -60,10 +60,31 @@ cliente = Cliente(nome=inserir_nome, email=inserir_email, senha=inserir_senha)
 session.add(cliente)
 session.commit()
 
-#Read - Select - Consultas
+#Read - SELECT - Consultas
 print("\nExibindo dados de todos os clientes.")
 lista_clientes = session.query(Cliente).all()
 
 for cliente in lista_clientes:
     print(f"{cliente.id} - {cliente.nome} - {cliente.email} - {cliente.senha}")
+    
+#U - Update - UPDATE - Atualizar
+print("\nAtualizando dados do usuario.")
+email_cliente = input("Digite o e-mail do cliente que sera atualizado: ")
 
+cliente = session.query(Cliente).filter_by(email = email_cliente).first()
+
+if cliente:
+    cliente.nome = input("Digite seu nome: ")
+    cliente.email = input("Digite seu e-mail: ")
+    cliente.senha = input("Digite seu senha: ")
+
+    session.commit()
+else:
+    print("Cliente nao encontrado.")
+
+#Read - SELECT - Consultas
+print("\nExibindo dados de todos os clientes.")
+lista_clientes = session.query(Cliente).all()
+
+for cliente in lista_clientes:
+    print(f"{cliente.id} - {cliente.nome} - {cliente.email} - {cliente.senha}")
