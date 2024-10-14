@@ -88,3 +88,23 @@ lista_clientes = session.query(Cliente).all()
 
 for cliente in lista_clientes:
     print(f"{cliente.id} - {cliente.nome} - {cliente.email} - {cliente.senha}")
+
+#D - Delete - DELETE - EXCLUIR
+print("\nExcluir dados de um cliente. ")
+email_cliente = input("Digite o e-mail do cliente que sera excluido: ")
+
+cliente = session.query(Cliente).filter_by(email = email_cliente).first()
+
+if cliente:
+    session.delete(cliente)
+    session.commit()
+    print(f"Cliente {cliente.nome} Excluido com sucesso!")
+else:
+    print("Cliente nao encontrado.")
+    
+#Read - SELECT - Consultas
+print("\nExibindo dados de todos os clientes.")
+lista_clientes = session.query(Cliente).all()
+
+for cliente in lista_clientes:
+    print(f"{cliente.id} - {cliente.nome} - {cliente.email} - {cliente.senha}")
